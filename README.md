@@ -1,7 +1,7 @@
-## Words of interest
-`local varList "tesla rocket alien robot falcon dragon car"`
-
 ## Builing the Network
+
+### Words of interest
+`local varList "tesla rocket alien robot falcon dragon car"`
 
 ### Adjacency Matrix
 ###### Note symmetry in the matrix. (There is no respect to order of occurence, just purely occurence)
