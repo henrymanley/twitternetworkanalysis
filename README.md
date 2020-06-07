@@ -60,5 +60,12 @@ foreach i of local varList {
 ```
 import delimited "adjmat.csv", delimiter(comma) clear
 nwimport "adjmat.csv", type(matrix)
-nwplot adjmat, lab
+	replace _nodelab = "tesla" in 1
+	replace _nodelab  = "rocket" in 2
+	replace _nodelab  = "alien" in 3
+	replace _nodelab  = "robot" in 4
+	replace _nodelab  = "falcon" in 5
+	replace _nodelab  = "dragon" in 6
+	replace _nodelab  = "car" in 7
+nwplot adjmat, label(_nodelab)
 ```
