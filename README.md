@@ -2,7 +2,7 @@
 `local varList "tesla rocket alien robot falcon dragon car"`
 
 ## Adjacency Matrix
-### Note symmetry in the matrix. (There is no respect to order of occurence, just purely occurence)
+###### Note symmetry in the matrix. (There is no respect to order of occurence, just purely occurence)
 
 ```
 local y = 1
