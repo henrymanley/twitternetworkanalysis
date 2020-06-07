@@ -3,6 +3,24 @@
 ### Words of interest
 `local varList "tesla rocket alien robot falcon dragon car"`
 
+### Adjacency Matrix Weights
+```
+mat B =J(7,7,.)
+mat colnames B = "tesla" "rocket" "alien" "robot" "falcon" "dragon" "car"
+mat rownames B = "tesla" "rocket" "alien" "robot" "falcon" "dragon" "car"
+
+local y = 1
+foreach i of local varList {
+	local x = 1
+	foreach j of local varList {
+		gen freq_`i'_`j' = `i'*`j'
+		summ freq_`i'_`j'
+		mat B[`x',`y']=r(sum)
+		loc x = `x' + 1
+		}
+	loc y = `y' + 1
+	}
+```
 ### Adjacency Matrix
 ###### Note symmetry in the matrix. (There is no respect to order of occurence, just purely occurence)
 
@@ -27,25 +45,6 @@ foreach i of local varList {
 	keep A1 A2 A3 A4 A5 A6 A7
 
 export delimited "adjmat.csv", replace
-```
-
-### Adjacency Matrix Weights
-```
-mat B =J(7,7,.)
-mat colnames B = "tesla" "rocket" "alien" "robot" "falcon" "dragon" "car"
-mat rownames B = "tesla" "rocket" "alien" "robot" "falcon" "dragon" "car"
-
-local y = 1
-foreach i of local varList {
-	local x = 1
-	foreach j of local varList {
-		gen freq_`i'_`j' = `i'*`j'
-		summ freq_`i'_`j'
-		mat B[`x',`y']=r(sum)
-		loc x = `x' + 1
-		}
-	loc y = `y' + 1
-	}
 ```
 
 ## Visualizing the Network
