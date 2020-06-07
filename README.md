@@ -58,6 +58,8 @@ foreach i of local varList {
 
 ## Visualizing the Network
 ```
+find it nwcommands
+
 import delimited "adjmat.csv", delimiter(comma) clear
 nwimport "adjmat.csv", type(matrix)
 	replace _nodelab = "tesla" in 1
