@@ -22,6 +22,19 @@ foreach i of local varList {
 		}
 	loc y = `y' + 1
 	}
+	
+	svmat A 
+	keep A1 A2 A3 A4 A5 A6 A7
+	gen id = ""
+		replace id = "tesla" in 1
+		replace id = "rocket" in 2
+		replace id = "alien" in 3
+		replace id = "robot" in 4
+		replace id = "falcon" in 5
+		replace id = "dragon" in 6
+		replace id = "car" in 7
+	
+export delimited "adjmat.csv", replace
 ```
 
 ### Adjacency Matrix Weights
