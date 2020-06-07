@@ -55,3 +55,10 @@ foreach i of local varList {
 	loc y = `y' + 1
 	}
 ```
+
+## Visualizing the Network
+```
+import delimited "adjmat.csv", delimiter(comma) clear
+nwimport "adjmat.csv", type(matrix)
+nwplot adjmat, lab
+```
