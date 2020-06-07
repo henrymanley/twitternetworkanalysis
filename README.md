@@ -1,4 +1,4 @@
-## Builing the Network
+## Building the Network
 
 ### Words of interest
 `local varList "tesla rocket alien robot falcon dragon car"`
