@@ -1,7 +1,9 @@
 ## Words of interest
 `local varList "tesla rocket alien robot falcon dragon car"`
 
-## Adjacency Matrix
+## Builing the Network
+
+### Adjacency Matrix
 ###### Note symmetry in the matrix. (There is no respect to order of occurence, just purely occurence)
 
 ```
@@ -22,7 +24,7 @@ foreach i of local varList {
 	}
 ```
 
-## Adjacency Matrix Weights
+### Adjacency Matrix Weights
 ```
 mat B =J(7,7,.)
 mat colnames B = "tesla" "rocket" "alien" "robot" "falcon" "dragon" "car"
