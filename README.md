@@ -1,5 +1,5 @@
 ## Words of interest
-local varList "tesla rocket alien robot falcon dragon car"
+`local varList "tesla rocket alien robot falcon dragon car"
 
 ## Adjacency Matrix
 ### Note symmetry in the matrix. (There is no respect to order of occurence, just purely occurence)
@@ -34,7 +34,7 @@ foreach i of local varList {
 	foreach j of local varList {
 		gen freq_`i'_`j' = `i'*`j'
 		summ freq_`i'_`j'
-			mat B[`x',`y']=r(sum)
+		mat B[`x',`y']=r(sum)
 		loc x = `x' + 1
 		}
 	loc y = `y' + 1
