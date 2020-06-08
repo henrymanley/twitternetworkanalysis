@@ -90,5 +90,6 @@ foreach i of local varList{
 	loc y = `y' + 1
 }
 
-nwplot adjmat_1, label(_nodelab) size(d1) title(Elon Musk Tweets, color(black) size(large)) scatteropt(mfcolor(red))
+nwplot adjmat, label(_nodelab) size(d1) title(Elon Musk Tweets, color(black) size(large)) scatteropt(mfcolor(blue))
+nwplotmatrix adjmat, label(_nodelab) title(Elon Musk Tweets, color(black) size(large))
 ```
