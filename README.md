@@ -7,6 +7,9 @@ gen `i' = 0
 replace `i' = 1 if regexm(tweet_clean, ["`i'"])
 }
 
+gen number = "tesla rocket alien robot falcon dragon car science computer ai love tech technology engine energy earth great spacex hyperloop first life model orbit nasa world station mars project rate machine solar system transport planet colonize" 
+gen dim = wordcount(number)
+drop number
 ```
 ### Define and names empty n x n Matrix B
 ```
