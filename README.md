@@ -74,7 +74,7 @@ keep A1-D1
 export delimited "adjmat.csv", replace
 ```
 
-### Setting the network
+### Setting the network & Visualization
 ```
 import delimited "adjmat.csv", delimiter(comma) clear
 nwimport "adjmat.csv", type(matrix)
