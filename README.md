@@ -1,8 +1,4 @@
 ## Building the Network
-
-
-
-
 ### Encoding variables based on occurence
 ```
 local varList "tesla rocket alien robot falcon dragon car science computer ai love tech technology engine energy"
@@ -14,7 +10,7 @@ replace `i' = 1 if regexm(tweet_clean, ["`i'"])
 ```
 ### Define and names empty n x n Matrix B
 ```
-mat B =J(15,15,0)
+mat B =J(dim[1],dim[1],0)
 local y = 1
 foreach i of local varList{
 tokenize `varList'
@@ -40,7 +36,7 @@ foreach i of local varList {
 ```
 ### Creates Adjacency Matrix A
 ```
-mat A =J(15,15,0)
+mat A =J(dim[1],dim[1],0)
 local y = 1
 foreach i of local varList{
 tokenize `varList'
