@@ -1,14 +1,12 @@
 use "formatrix.dta", clear
 
-*I 
-*encodes (creates dummy) variables based on occurence
+*I) Encodes variables based on occurence
 foreach i of local varList {
 gen `i' = 0
 replace `i' = 1 if regexm(tweet_clean, ["`i'"])
 }
 
-*II
-*sets and names matrix col/rows
+*II) Sets and names matrix col/rows
 
 mat B =J(dim[1],dim[1],0)
 local y = 1
@@ -20,8 +18,7 @@ mat colnames B = `varList1'
 loc y = `y' + 1
 }
 
-*III
-*counts frequency of words defined in (I) and populations nxn matrix
+*III) Counts frequency of words defined in (I) and populates nxn matrix
 local y = 1
 foreach i of local varList {
 	local x = 1
@@ -34,8 +31,7 @@ foreach i of local varList {
 	loc y = `y' + 1
 	}
 
-*IV
-*creates adjacency matrix (no respect for frequency)
+*IV) Creates adjacency matrix (no respect for frequency)
 mat A =J(dim[1],dim[1],0)
 local y = 1
 foreach i of local varList{
@@ -62,8 +58,7 @@ foreach i of local varList {
 	loc y = `y' + 1
 }
 
-*V
-*saves matrix A and obtains freq from matrix B (diagonal) and merges it to output
+*V) Saves matrix A and obtains freq from matrix B (diagonal) and merges it to output
 	mat C = vecdiag(B)
 	mat D = C'
 	
@@ -74,7 +69,7 @@ foreach i of local varList {
 	export delimited adjmat.csv, replace
 
 
-*VI sets the network
+*VI) Sets the network
 import delimited "adjmat.csv", delimiter(comma) clear
 nwimport "adjmat.csv", type(matrix)
 
