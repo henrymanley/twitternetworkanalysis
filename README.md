@@ -1,1 +1,5 @@
-Work in progress
+## Packages
+`findit nwcommands`
+
+## Adjacency Matrix
+matrices.do
