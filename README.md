@@ -12,4 +12,4 @@ ssc install txttool
 See [preprocessing.do](preprocessing.do) for generalized approach to token cleaning in Stata. Output is an array of the n most frequent words.
 
 ## Setting the network
-See [matrices.do](matrices.do) for the computation of adjacency and frequency matrices. Similarly, the creation and visualization of the text network.
+See [matrices.do](matrices.do) for the computation of adjacency and frequency matrices using the n most frequent words. Similarly, the creation and visualization of the text network.
