@@ -1,29 +1,16 @@
-use "formatrix.dta", clear
+append using formatrix.dta
+levelsof words, local(wordlist)
 
-*I) Encodes variables based on occurence
-foreach i of local varList {
-gen `i' = 0
-replace `i' = 1 if regexm(tweet_clean, ["`i'"])
+foreach i of local wordlist {
+	gen x_`i' = 0
+	replace x_`i' = 1 if regexm(tweet_clean, ["`i'"])
 }
 
-*II) Sets and names matrix col/rows
-
-mat B =J(dim[1],dim[1],0)
 local y = 1
-foreach i of local varList{
-tokenize `varList'
-local  varList1 = regexr("`varList'","`y'","")
-mat rownames B = `varList1'
-mat colnames B = `varList1'
-loc y = `y' + 1
-}
-
-*III) Counts frequency of words defined in (I) and populates nxn matrix
-local y = 1
-foreach i of local varList {
+foreach i of local wordlist {
 	local x = 1
-	foreach j of local varList {
-		gen freq_`i'_`j' = `i'*`j'
+	foreach j of local wordlist {
+		gen freq_`i'_`j' = x_`i'*x_`j'
 		summ freq_`i'_`j'
 			mat B[`x',`y']=r(sum)
 		loc x = `x' + 1
@@ -31,21 +18,12 @@ foreach i of local varList {
 	loc y = `y' + 1
 	}
 
-*IV) Creates adjacency matrix (no respect for frequency)
-mat A =J(dim[1],dim[1],0)
+mat A =J(dim,dim,0)
+levelsof words, local(wordlist)
 local y = 1
-foreach i of local varList{
-tokenize `varList'
-local  varList1 = regexr("`varList'","`y'","")
-mat rownames A = `varList1'
-mat colnames A = `varList1'
-loc y = `y' + 1
-}
-
-local y = 1
-foreach i of local varList {
+foreach i of local wordlist {
 	local x = 1
-	foreach j of local varList {
+	foreach j of local wordlist {
 		summ freq_`i'_`j'
 			if r(max) > 0 {
 				mat A[`x',`y']= 1
@@ -58,26 +36,18 @@ foreach i of local varList {
 	loc y = `y' + 1
 }
 
-*V) Saves matrix A and obtains freq from matrix B (diagonal) and merges it to output
 	mat C = vecdiag(B)
 	mat D = C'
 	
 	svmat A 
 	svmat D
 	
-	keep A1-D1
+	keep words A1-D1
 	export delimited adjmat.csv, replace
-
-
-*VI) Sets the network
+	
+nwdrop
 import delimited "adjmat.csv", delimiter(comma) clear
 nwimport "adjmat.csv", type(matrix)
 
-local varList "tesla rocket alien robot falcon dragon car science computer ai love tech technology engine energy earth great spacex hyperloop first life model orbit nasa world station mars project rate machine solar system transport planet colonize" 
-local y = 1
-foreach i of local varList{
-	replace _nodelab = "`i'" in `y'
-	loc y = `y' + 1
-}
-
-	nwplot adjmat, label(_nodelab) size(d1) title(Elon Musk Tweets, color(black) size(large)) scatteropt(mfcolor(blue))
+nwplot adjmat, label(words) size(d1) title(Elon Musk Tweets, color(black) size(large)) scatteropt(mfcolor(blue))
+nwplotmatrix adjmat, label(words) title(Elon Musk Tweets, color(black) size(large))
