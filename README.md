@@ -1,10 +1,10 @@
-# WORK IN PROGRESS
 
-## Packages
+## Packages to install
 ```
 findit nwcommands
 ssc install txttool
 ```
 
-## Adjacency Matrix
+## Text preprocessing
+
 matrices.do
