@@ -1,9 +1,7 @@
 use "formatrix.dta", clear
 
 split tweet_clean, parse("") gen(tokens_)
-
-local punctuation = ". ? , ! : ; - &"
-local numbers = "1 2 3 4 5 6 7 8 9 0"
+local punctuation = ". ~ ? ) , ] ! [ : + $ ; - & # % ( * 1 2 3 4 5 6 7 8 9 0"
 
 drop id-tag
 local y = 1
@@ -26,13 +24,9 @@ drop if tokens_ ==""
 sort tokens_
 quiet by tokens_ : gen count = _N
 quiet by tokens_ : keep if _n == 1
-gsort - count
 
+txttool tokens_, replace stopwords("stopwords.txt") 
+drop if tokens_ ==""
+gsort - count
 gen words = tokens_ if _n <100
-drop if words ==""
 keep words
-gen id = _n
-summ id 
-scalar dim = r(max)
-drop id
-levelsof words, local(varList)
