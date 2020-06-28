@@ -9,8 +9,7 @@ ssc install txttool
 - See [formatrix.dta](formatrix.dta) for baseline cleaned data.
 
 ## Text preprocessing
-See [preprocessing.do](preprocessing.do) for generalizable approach to token cleaning in Stata.
+See [preprocessing.do](preprocessing.do) for generalized approach to token cleaning in Stata. Output is an array of the n most frequent words.
 
-
-matrices.do
-See [matrices.do](matrices.do)
+## Setting the network
+See [matrices.do](matrices.do) for the computation of adjacency and frequency matrices. Similarly, the creation and visualization of the text network.
