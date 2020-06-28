@@ -28,5 +28,10 @@ quiet by tokens_ : keep if _n == 1
 txttool tokens_, replace stopwords("stopwords.txt") 
 drop if tokens_ ==""
 gsort - count
-gen words = tokens_ if _n <100
+gen words = tokens_ if _n <=20
 keep words
+drop if words==""
+gen id = _n
+summ id 
+scalar dim = r(max)
+drop id
