@@ -1,8 +1,10 @@
 # WORK IN PROGRESS
 
 ## Packages
-`findit nwcommands
-ssc install txttool'
+```
+findit nwcommands
+ssc install txttool
+```
 
 ## Adjacency Matrix
 matrices.do
