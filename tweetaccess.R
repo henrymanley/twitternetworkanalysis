@@ -2,16 +2,9 @@ getwd()
 setwd("C:/Users/henry/OneDrive/Desktop")
 
 install.packages("rtweet")
-install.packages("tidytext")
-install.packages("ggpubr")
-install.packages("tidyverse")
 install.packages("data.table")
 
-
 library(rtweet) 
-library(tidytext)
-library(ggpubr) 
-library(tidyverse)
 library(data.table)
 
 cnn_tweets <- get_timeline("@cnn", n=3000)
