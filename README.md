@@ -9,7 +9,7 @@ ssc install txttool
 - See [tokenlist.dta](tokenlist.dta) for most frequent tokens in [tweets.dta](tweets.dta).
 
 ## Text preprocessing
-See [preprocessing.do](preprocessing.do) for and cleaning tokenization. Output is an array of the n most frequent words.
+See [preprocessing.do](preprocessing.do) for cleaning, tokenization, and sorting. Output is an array of the n most frequent words.
 
 ## Setting the network
 See [networksetting.do](networksetting.do) for the computation of adjacency and frequency matrices using the n most frequent words. Similarly, the creation and visualization of the text network.
