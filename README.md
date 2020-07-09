@@ -5,11 +5,11 @@ findit nwcommands
 ssc install txttool
 ```
 ## Data
-- See [elonmusk_tweets.csv](elonmusk_tweets.csv) for raw data.
-- See [formatrix.dta](formatrix.dta) for baseline cleaned data.
+- See [tweets.dta](tweets.dta) for raw data collected using [tweetaccess.R](tweetaccess.R)
+- See [tokenlist.dta](tokenlist.dta) for most frequent tokens in [tweets.dta](tweets.dta).
 
 ## Text preprocessing
-See [preprocessing.do](preprocessing.do) for generalized approach to token cleaning in Stata. Output is an array of the n most frequent words.
+See [preprocessing.do](preprocessing.do) for and cleaning tokenization. Output is an array of the n most frequent words.
 
 ## Setting the network
-See [matrices.do](matrices.do) for the computation of adjacency and frequency matrices using the n most frequent words. Similarly, the creation and visualization of the text network.
+See [networksetting.do](networksetting.do) for the computation of adjacency and frequency matrices using the n most frequent words. Similarly, the creation and visualization of the text network.
