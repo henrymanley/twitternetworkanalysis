@@ -1,9 +1,23 @@
-use "formatrix.dta", clear
+local newslist "cnn fox atlantic msnbc nyt washingtonpost wsj bloomberg breitbart economist"
+foreach i of local newslist {
+	import delimited "`i'tweets.csv"
+	keep created_at text favorite_count is_retweet retweet_count screen_name
+	drop if text ==""
+	save "`i'tweets.dta", replace
+	clear
+}
 
-split tweet_clean, parse("") gen(tokens_)
+use "cnntweets.dta"	
+local newslist "fox atlantic msnbc nyt washingtonpost wsj bloomberg breitbart economist"
+foreach i of local newslist {
+	append using "`i'tweets.dta", force
+}
+replace text = lower(text)
+save "tweets.dta", replace
+split text, parse("") gen(tokens_)
+
+
 local punctuation = ". ~ ? ) , ] ! [ : + $ ; - & # % ( * 1 2 3 4 5 6 7 8 9 0"
-
-drop id-tag
 local y = 1
 foreach i of local punctuation {
 	describe
@@ -28,10 +42,16 @@ quiet by tokens_ : keep if _n == 1
 txttool tokens_, replace stopwords("stopwords.txt") 
 drop if tokens_ ==""
 gsort - count
-gen words = tokens_ if _n <=20
-keep words
-drop if words==""
-gen id = _n
+
+save "mostusedwords.dta", replace
+
+drop if substr(tokens_,1, 4) == "http"
+drop if strlen(tokens_)< 3
+replace id = _n
+keep if _n<=40
 summ id 
 scalar dim = r(max)
 drop id
+
+keep tokens_ count
+append using "tweets.dta"
