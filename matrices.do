@@ -1,11 +1,14 @@
-append using formatrix.dta
-levelsof words, local(wordlist)
+levelsof tokens_, local(wordlist)
 
+*encodes (creates dummy) variables based on occurence
 foreach i of local wordlist {
 	gen x_`i' = 0
-	replace x_`i' = 1 if regexm(tweet_clean, ["`i'"])
+	replace x_`i' = 1 if regexm(text, ["`i'"])
 }
 
+*III
+*counts frequency of words defined in (I) and populates nxn matrix
+mat B =J(dim,dim,0)
 local y = 1
 foreach i of local wordlist {
 	local x = 1
@@ -18,8 +21,10 @@ foreach i of local wordlist {
 	loc y = `y' + 1
 	}
 
+*IV
+*creates adjacency matrix (no respect for frequency)
 mat A =J(dim,dim,0)
-levelsof words, local(wordlist)
+levelsof tokens_, local(wordlist)
 local y = 1
 foreach i of local wordlist {
 	local x = 1
@@ -35,19 +40,20 @@ foreach i of local wordlist {
 		}
 	loc y = `y' + 1
 }
-
 	mat C = vecdiag(B)
 	mat D = C'
 	
 	svmat A 
 	svmat D
 	
-	keep words A1-D1
+	keep tokens_ A1-D1
+	gen id = _n
+	drop if id > dim
 	export delimited adjmat.csv, replace
-	
+
 nwdrop
 import delimited "adjmat.csv", delimiter(comma) clear
 nwimport "adjmat.csv", type(matrix)
 
-nwplot adjmat, label(words) size(d1) title(Elon Musk Tweets, color(black) size(large)) scatteropt(mfcolor(blue))
-nwplotmatrix adjmat, label(words) title(Elon Musk Tweets, color(black) size(large))
+	nwplot adjmat, label(_nodelab) size(d1) title(News Tweets, color(black) size(large)) scatteropt(mfcolor(red))
+	nwplotmatrix adjmat, label(_nodelab) title(News Tweets, color(black) size(large))
