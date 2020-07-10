@@ -1,5 +1,5 @@
 getwd()
-setwd("C:/Users/henry/OneDrive/Desktop")
+setwd("your/file/path")
 
 install.packages("rtweet")
 install.packages("data.table")
