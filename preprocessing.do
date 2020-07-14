@@ -63,8 +63,6 @@ foreach i in `c(alpha)'{
 }
 
 sort tokens_
-levelsof tokens_, local(words)
-
 drop words
 gen words = _n
 
