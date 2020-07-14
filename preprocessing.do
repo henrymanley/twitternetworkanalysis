@@ -55,3 +55,20 @@ drop id
 
 keep tokens_ count
 append using "tweets.dta"
+
+keep in 1/40
+foreach i in `c(alpha)'{
+	gen `i' = 0
+	replace `i' = 1 if regexm(tokens_, ["`i'"])
+}
+
+sort tokens_
+levelsof tokens_, local(words)
+
+drop words
+gen words = _n
+
+xpose, clear
+drop in 1
+
+export delimited using "tocharvec", replace
