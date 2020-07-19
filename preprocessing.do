@@ -14,6 +14,16 @@ foreach i of local newslist {
 }
 replace text = lower(text)
 save "tweets.dta", replace
+
+gen tweet_date = ""
+replace tweet_date = substr(created_at, 1, strlen(created_at) - 10)
+drop if strlen(tweet_date)>15
+drop if tweet_date ==""
+gen date = date(tweet_date, "YMD")
+format date %td
+drop tweet_date
+save "tweetss.dta"
+
 split text, parse("") gen(tokens_)
 
 
