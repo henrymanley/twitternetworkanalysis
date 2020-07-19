@@ -1,4 +1,11 @@
-levelsof tokens_, local(wordlist)
+import delimited "C:\Users\henry\OneDrive\Desktop\mostfrequent.csv"
+drop in 1
+keep v2
+rename v2 words
+save "words.dta", replace
+append using "tweetss.dta"
+
+levelsof words, local(wordlist)
 
 *encodes (creates dummy) variables based on occurence
 foreach i of local wordlist {
