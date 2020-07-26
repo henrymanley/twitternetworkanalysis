@@ -1,5 +1,5 @@
-install.packages("lsa")
 library(lsa)
+
 data <- read.csv(file = 'tocharvec.csv')
 data1 <- read.csv(file = 'tocharvecc.csv')
 data1 <- data1$tokens_
