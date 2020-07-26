@@ -1,9 +1,6 @@
 getwd()
 setwd("your/file/path")
 
-install.packages("rtweet")
-install.packages("data.table")
-
 library(rtweet) 
 library(data.table)
 
