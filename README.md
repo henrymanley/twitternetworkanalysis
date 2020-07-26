@@ -1,9 +1,17 @@
 
 ## Packages to install
+### Stata
 ```
 findit nwcommands
 ssc install txttool
 ```
+### R
+```
+install.packages("lsa")
+install.packages("rtweet")
+install.packages("data.table")
+```
+
 ## Data
 - See [tweets.dta](tweets.dta) for raw data collected using [tweetaccess.R](tweetaccess.R)
 - See [tokenlist.dta](tokenlist.dta) for most frequent tokens in [tweets.dta](tweets.dta).
