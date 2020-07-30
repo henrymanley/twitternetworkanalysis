@@ -2,7 +2,7 @@
 data <- drive_get(id = "name of folder w all sheets", type = "spreadsheet")
 
 
-clist <- c("schoolnames")
+clist <- data$schoolname
 for (j in clist){
   for (i in seq(1, length(data), 1)){
     data[[i]]
