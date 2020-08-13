@@ -1,6 +1,8 @@
-local complist CNN MSNBC nytimes WSJ business BreitbartNews TheEconomist FoxNews
+
+local complist CNN MSNBC nytimes WSJ business BreitbartNews TheEconomist FoxNews TheAtlantic washingtonpost
 foreach k of local complist {
-	use "tweets.dta",clear
+	use "cleantweets.dta",clear
+	keep if time == 2
 	scalar dim = 40
 	keep if screen_name == "`k'"
 	append using "words.dta"
@@ -61,26 +63,29 @@ foreach i of local wordlist {
 }
 
 
-mat D = B_CNN
-local complist CNN MSNBC nytimes WSJ business BreitbartNews TheEconomist FoxNews
-foreach k of local complist {
-	mat E = B_`k'
-		mata 
-				D = st_matrix("D")
-				E = st_matrix("E")
-				F = D - E
-				F = F*F
-				st_numscalar("name", sum(F)/2)
-		end 
-	scalar `k' = name
+mata
+void reduce() {
+	D = st_matrix("D")
+	E = st_matrix("E")
+	F = (D - E)^2
+	st_numscalar("name", sqrt(sum(F))/2)
 }
 
-gen test = scalar 
+end
 
-nwdrop
-import delimited ".csv", delimiter(comma) clear
-nwimport ".csv", type(matrix)
+capture program drop runme 
+program define runme 
 
-	nwplot adjmat, label(_nodelab) size(d1) title(News Tweets, color(black) size(large)) scatteropt(mfcolor(red))
-	nwplotmatrix adjmat, label(_nodelab) title(News Tweets, color(black) size(large))
-	
+// base matrix 
+mat D = A_CNN 
+local complist CNN MSNBC nytimes WSJ business BreitbartNews TheEconomist FoxNews TheAtlantic washingtonpost
+
+foreach k of local complist {
+	mat E = A_`k'
+	mata: reduce()
+	scalar `k' = name
+	noi display "`k' = " `k'
+}
+end
+
+runme
